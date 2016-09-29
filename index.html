@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Select</title>
+<link href="select.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="dropdown">
+		    <a class="dropdown-toggle">
+		        <span data-value="merchandisingValue">--</span>
+		    </a>
+		    <ul class="dropdown-list">
+		        <li data-value="merchandisingValue">--</li>
+		        <li data-value="startDate">Newest</li>
+		        <li data-value="price">Price: Low - High</li>
+		        <li data-value="priceHigh">Price: High - Low</li>
+		    </ul>
+		</div>
+	</div>
+
+	<script src="jquery.min.js"></script>
+	<script src="select.js"></script>
+	<script>
+		$(document).ready(function(){
+			// $(".dropdown-toggle").click(function(e) {
+
+			// 	$(this).siblings(".dropdown-menu").show();
+				
+			// 	$(this).uiSelect({
+			// 		toggle: 'dropdown-toggle',
+   //  				dropdown:'dropdown-menu'
+			// 	});
+
+			// });
+
+			$('.dropdown').uiSelect({
+				toggle: '.dropdown-toggle',
+				dropdown: '.dropdown-list'
+			});
+		});
+	</script>
+</body>
+</html>
