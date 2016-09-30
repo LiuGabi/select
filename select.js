@@ -17,6 +17,7 @@ $.fn.uiSelect = function(options) {
             });
 
         });
+
     }
 
     var selectSort = function(dropdown) {
@@ -32,16 +33,18 @@ $.fn.uiSelect = function(options) {
 
         });
 
+        opts.callback();
+
     }
 
-    var handleCallback = function(opts.callBackSelect) {
+    // var handleCallback = function(opts.callBackSelect) {
 
-        if (typeof opts.callBackSelect === "function") {
+    //     if (typeof opts.callBackSelect === "function") {
 
                         
-        }
+    //     }
 
-    }
+    // }
 
     click(opts.toggle, opts.dropdown);
 
