@@ -1,57 +1,47 @@
 $.fn.uiSelect = function(options) {
 
-    var parent = $(this);
-
     var opts = $.extend({}, $.fn.uiSelect.defaults, options);
 
-    var click = function(toggle, dropdown) {
+    var parent = $(this);
 
-        parent.children(toggle).click(function(e) {
+    var toggle = parent.children(opts.toggle);
 
-            $(this).siblings(dropdown).show(function() {
+    var dropdown = parent.children(opts.dropdown);
 
-                selectSort($(this));
+    var init = function() {
 
-                // console.log(this);
+        toggle.click(function() {
 
-            });
+            $(this).siblings(opts.dropdown).show();
+
+        });
+
+        dropdown.mouseleave(function() {
+
+            $(this).hide();
 
         });
 
     }
 
-    var selectSort = function(dropdown) {
+    dropdown.children().click(function() {
 
-        dropdown.children().click(function() {
+        var dataValue = $(this).attr("data-value");
+        
+        toggle.children().text($(this).text());
+        toggle.children().attr("data-value", dataValue);
 
-            $(this).text();
+        opts.callback.call(this, dataValue);
 
-            var dataValue = $(this).attr("data-value");
-            
-            dropdown.siblings(opts.toggle).children().text($(this).text());
-            dropdown.siblings(opts.toggle).children().attr("data-value", dataValue);
+    });
 
-        });
 
-        opts.callback();
-
-    }
-
-    // var handleCallback = function(opts.callBackSelect) {
-
-    //     if (typeof opts.callBackSelect === "function") {
-
-                        
-    //     }
-
-    // }
-
-    click(opts.toggle, opts.dropdown);
+    init();
 
 };
 
 $.fn.uiSelect.defaults = {
     toggle: '.dropdown-toggle',
     dropdown: '.dropdown-list',
-    callBackSelect: function() {}
+    callback: function() {}
 };
