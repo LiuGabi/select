@@ -10,15 +10,33 @@ $.fn.uiSelect = function(options) {
 
     var init = function() {
 
-        toggle.click(function() {
+        toggle.on('click touchstart', function(e) {
 
-            $(this).siblings(opts.dropdown).show();
+            dropdown.toggle();
+
+            e.preventDefault();
 
         });
 
-        dropdown.mouseleave(function() {
+        // $('body').click(function(e) {
 
-            $(this).hide();
+        //     console.log(e);
+
+        //     if($(e.target).hasClass('dropdown')) {
+        //         return;
+        //     }
+
+        //     dropdown.hide();
+
+        // });
+
+        $('body').not($('.dropdown')).on('click touchstart', function(e) {
+
+            console.log(this);
+            console.log(opts.dropdown);
+
+            dropdown.hide();
+            e.preventDefault();
 
         });
 
@@ -31,7 +49,11 @@ $.fn.uiSelect = function(options) {
         toggle.children().text($(this).text());
         toggle.children().attr("data-value", dataValue);
 
-        opts.callback.call(this, dataValue);
+        if (typeof(opts.callback) == "function") {
+
+            opts.callback.call(this, dataValue);
+
+        }
 
     });
 
