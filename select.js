@@ -2,45 +2,46 @@ $.fn.uiSelect = function(options) {
 
     var opts = $.extend({}, $.fn.uiSelect.defaults, options);
 
+
     var parent = $(this);
 
     var toggle = parent.children(opts.toggle);
 
     var dropdown = parent.children(opts.dropdown);
 
+
     var init = function() {
 
         toggle.on('click touchstart', function(e) {
 
-            dropdown.toggle();
 
-            e.preventDefault();
+            dropdown.toggle();
+            e.stopPropagation();
 
         });
 
-        // $('body').click(function(e) {
+        dropdown.on('click touchstart', function(e) {
 
-        //     console.log(e);
+            e.stopPropagation();
 
-        //     if($(e.target).hasClass('dropdown')) {
-        //         return;
-        //     }
+        });
 
-        //     dropdown.hide();
 
-        // });
-
-        $('body').not($('.dropdown')).on('click touchstart', function(e) {
-
-            console.log(this);
-            console.log(opts.dropdown);
+        $('html').not($(opts.dropdown)).on('click touchstart', function(e) {
 
             dropdown.hide();
-            e.preventDefault();
+            e.stopPropagation();
+
+        });
+
+        $(window).scroll(function() {
+
+            dropdown.hide();
 
         });
 
     }
+
 
     dropdown.children().click(function() {
 
